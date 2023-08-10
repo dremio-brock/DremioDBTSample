@@ -1,1 +1,1 @@
-select * from {{ source('samples', 'NYC-weather.csv')}}
+select * from {{ source('weather', 'NYC-weather.csv')}}

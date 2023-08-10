@@ -1,7 +1,7 @@
 SELECT vendor_id,
-       pickup_date,
+       cast(pickup_datetime as date) as pickup_date,
        pickup_datetime,
-       dropoff_date,
+       cast(dropoff_datetime as date) as dropoff_date,
        dropoff_datetime,
        passenger_count,
        trip_distance,
@@ -18,4 +18,4 @@ SELECT vendor_id,
        tip_amount,
        tolls_amount,
        total_amount
-FROM   {{ source('samples', 'NYC-taxi-trips-iceberg')}}
+FROM   {{ source('nyc', 'sample_data')}}
