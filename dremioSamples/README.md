@@ -21,5 +21,11 @@ Try running the following commands:
 ### Known Bugs:
 schema cannot contain dots or spaces. To work around this modify the {python_home}/Lib/site-packages/dbt/adapters/dremio/relation.py change line 51 to:
 
-return '"' + identifier + '"'
+<code> return '"' + identifier + '"' </code>
 
+### To Do:
+Add pre run script to prepare Dremio Sample Source.
+1. add source
+2. Format sources 
+    1. <code>Sample."NYC-weather.csv"</code>
+   2. <code>Sample."samples.dremio.com"."Dremio University".sample_data</code>
