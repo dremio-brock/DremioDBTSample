@@ -1,0 +1,25 @@
+version: 2
+
+sources:
+  - name: samples
+    database: Samples
+    schema: 'samples.dremio.com'
+    tables:
+      - name: NYC-weather.csv
+      - name: NYC-taxi-trips-iceberg
+
+models:
+  - name: preparation_weather
+    alias: weather
+
+  - name: preparation_trips
+    alias: trips
+
+  - name: business_weather_nyc
+    alias: nyc
+
+  - name: business_transportation_nyc_trips
+    alias: nyc_trips
+
+  - name: application_nyc_trips_with_weather
+    alias: nyc_trips_with_weather
