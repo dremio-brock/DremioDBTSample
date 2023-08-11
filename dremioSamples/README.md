@@ -1,13 +1,72 @@
 Welcome to your new dbt project!
 
-### Using the starter project for Dremio
+### Using the sample project for Dremio 
+This project will help build a Dremio Sample Dremio semantic layer that can be deployed to multiple enviormnets quickly
+
+
+### Setup Dremio
+- Add dremio samples source
+- Promote Samples."samples.dremio.com"."NYC-weather.csv" as csv with a header
+- Promote Samples."samples.dremio.com"."Dremio University"."sample_data" as parquet
+
+### Setup DBT
 pip install dbt-dremio
 
-follow the prompt to configure your dremio instance
+Follow the prompt to configure your dremio profiles.yml
+
 
 Try running the following commands:
 - dbt run
 - dbt test
+
+
+### Extra
+Modify your profile to include multiple environments
+
+```
+dremioSamples:
+  outputs:
+    dev:
+      dremio_space: dev
+      dremio_space_folder: no_schema
+      object_storage_path: dev
+      object_storage_source: $scratch
+      password: dremio123
+      port: 9047
+      software_host: localhost
+      threads: 1
+      type: dremio
+      use_ssl: false
+      user: dremio
+    test:
+      dremio_space: test
+      dremio_space_folder: no_schema
+      object_storage_path: test
+      object_storage_source: $scratch
+      password: dremio123
+      port: 9047
+      software_host: localhost
+      threads: 1
+      type: dremio
+      use_ssl: false
+      user: dremio
+    prod:
+      dremio_space: prod
+      dremio_space_folder: no_schema
+      object_storage_path: prod
+      object_storage_source: $scratch
+      password: dremio123
+      port: 9047
+      software_host: localhost
+      threads: 1
+      type: dremio
+      use_ssl: false
+      user: dremio
+  target: dev
+```
+
+- dbt run --target test
+- dbt run --target prod
 
 
 ### Resources:
@@ -23,10 +82,3 @@ schema cannot contain dots or spaces. To work around this modify the {python_hom
 
 <code>PATTERN = re.compile(r'''((?:[^."']|"[^"]*"|'[^']*')+)''')<br>
 return ".".join(PATTERN.split(identifier)[1::2]) </code>
-
-### To Do:
-Add pre run script to prepare Dremio Sample Source.
-1. add source
-2. Format sources 
-    1. <code>Sample."NYC-weather.csv"</code>
-   2. <code>Sample."samples.dremio.com"."Dremio University".sample_data</code>
