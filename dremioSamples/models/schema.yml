@@ -3,12 +3,12 @@ version: 2
 sources:
   - name: weather
     database: Samples
-    schema: samples.dremio.com
+    schema: '"samples.dremio.com"'
     tables:
       - name: NYC-weather.csv
   - name: nyc
     database: Samples
-    schema: 'samples.dremio.com"."Dremio University'
+    schema: '"samples.dremio.com"."Dremio University"'
     tables:
       - name: sample_data
 
@@ -23,7 +23,6 @@ models:
 
   - name: business_weather_nyc
     config:
-      schema: weather
       alias: nyc_weather
 
   - name: business_transportation_nyc_trips

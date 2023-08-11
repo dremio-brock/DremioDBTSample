@@ -21,7 +21,8 @@ Try running the following commands:
 ### Known Bugs:
 schema cannot contain dots or spaces. To work around this modify the {python_home}/Lib/site-packages/dbt/adapters/dremio/relation.py change line 51 to:
 
-<code> return '"' + identifier + '"' </code>
+<code>PATTERN = re.compile(r'''((?:[^."']|"[^"]*"|'[^']*')+)''')<br>
+return ".".join(PATTERN.split(identifier)[1::2]) </code>
 
 ### To Do:
 Add pre run script to prepare Dremio Sample Source.
