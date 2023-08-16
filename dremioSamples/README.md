@@ -78,7 +78,4 @@ dremioSamples:
 
 
 ### Known Bugs:
-schema cannot contain dots or spaces. To work around this modify the {python_home}/Lib/site-packages/dbt/adapters/dremio/relation.py change line 51 to:
-
-<code>PATTERN = re.compile(r'''((?:[^."']|"[^"]*"|'[^']*')+)''')<br>
-return ".".join(PATTERN.split(identifier)[1::2]) </code>
+schema cannot contain dots or spaces. To work around this, follow the instructions in this issue thread: https://github.com/dremio/dbt-dremio/issues/203
