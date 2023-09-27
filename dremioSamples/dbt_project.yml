@@ -43,3 +43,6 @@ models:
         +schema: Business.Weather
     Preparation:
       +schema: Preparation
+
+vars:
+  dremio:reflections_enabled: true

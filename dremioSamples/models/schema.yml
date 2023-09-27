@@ -25,6 +25,10 @@ models:
     config:
       alias: nyc_weather
 
+  - name: business_weather_nyc_reflections
+    config:
+      alias: nyc_weather_reflections
+
   - name: business_transportation_nyc_trips
     config:
       alias: nyc_trips
