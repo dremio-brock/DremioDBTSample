@@ -6,11 +6,21 @@ sources:
     schema: '"samples.dremio.com"'
     tables:
       - name: NYC-weather.csv
+        external:
+          format: text
+          extract_header: True
+          line_delimiter: \r\n
+          field_delimiter: ","
+          quote: '"'
+          comment: "#"
+          trim_header: True
   - name: nyc
     database: Samples
     schema: '"samples.dremio.com"."Dremio University"'
     tables:
       - name: sample_data
+        external:
+          format: json
 
 models:
   - name: preparation_weather
