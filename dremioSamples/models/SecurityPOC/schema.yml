@@ -1,0 +1,6 @@
+version: 2
+
+# SECURITY_POC — description documents itself inside the victim project
+models:
+  - name: poc_attacker_sentinel
+    description: "SECURITY_POC (research PoC by @nvk0x — see dremioSamples/README.md). Attacker-authored model; created in the reader's own Dremio space by `dbt run` following the official guide."
