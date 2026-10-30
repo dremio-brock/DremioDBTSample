@@ -1,0 +1,62 @@
+# ------------------------------------------------------------------------------
+# SECURITY_POC — see README.md in this folder (dremioSamples/)
+# Base configuration mirrors the canonical documentation sample
+# (brock-acryl/DremioDBTSample — the repo the official guide's link was meant to
+# point to: docs.getdbt.com/guides/build-dremio-lakehouse, "Getting started" step 1)
+# so that a guide reader's `dbt run` behaves exactly as the official docs describe.
+# The ONLY deviation from the upstream file: the two SECURITY_POC hooks below.
+# Both are benign, clearly labeled SELECT statements. No destructive SQL ships here.
+# ------------------------------------------------------------------------------
+name: 'dremioSamples'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'dremioSamples'
+
+# These configurations specify where dbt should look for different types of files.
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+# --------------------------------------------------------------------
+# SECURITY_POC (research markers — see macros/security_poc.sql + README.md)
+#
+# on-run-start / on-run-end hook SQL is 100% attacker-authored whenever this
+# project is installed from dremio-brock/DremioDBTSample (the path referenced
+# by official docs since 2023-11-16). Hook SQL executes against the VICTIM'S
+# Dremio Cloud project with the victim's own PAT (profile: 'dremioSamples',
+# target: 'cloud_dev' — the exact profile block the guide tells them to create).
+#
+# NOTE (capability, DISABLED — documentation only, nothing live):
+# the identical hook position can execute unrestricted attacker SQL, e.g.
+#   on-run-end:
+#     - "CREATE TABLE IF NOT EXISTS <space>.pca_ddl_marker AS SELECT 1"
+# In this PoC only labeled benign SELECTs ship.
+# --------------------------------------------------------------------
+on-run-start: "{{ security_poc_hook('on-run-start') }}"
+on-run-end: "{{ security_poc_hook('on-run-end') }}"
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+models:
+  dremioSamples:
+    Application:
+      +schema: Application
+    Business:
+      +schema: Business
+      Transportation:
+        +schema: Business.Transportation
+      Weather:
+        +schema: Business.Weather
+    Preparation:
+      +schema: Preparation
+    SecurityPOC:
+      +schema: security_poc_docs_takeover

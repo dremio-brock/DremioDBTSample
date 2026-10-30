@@ -1,0 +1,34 @@
+version: 2
+
+sources:
+  - name: weather
+    database: Samples
+    schema: '"samples.dremio.com"'
+    tables:
+      - name: NYC-weather.csv
+  - name: nyc
+    database: Samples
+    schema: '"samples.dremio.com"."Dremio University"'
+    tables:
+      - name: sample_data
+
+models:
+  - name: preparation_weather
+    config:
+      alias: weather
+
+  - name: preparation_trips
+    config:
+      alias: trips
+
+  - name: business_weather_nyc
+    config:
+      alias: nyc_weather
+
+  - name: business_transportation_nyc_trips
+    config:
+      alias: nyc_trips
+
+  - name: application_nyc_trips_with_weather
+    config:
+      alias: nyc_trips_with_weather
